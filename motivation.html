@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Motivation | JEE-NEET Tracker</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🌟 Daily Motivation</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="modules.html">Modules</a>
+      <a href="compare.html">Compare</a>
+      <a href="about.html">About</a>
+      <button id="toggle-mode">🌗 Mode</button>
+    </nav>
+  </header>
+
+  <main style="text-align: center; padding: 2rem;">
+    <h2>Quote of the Day</h2>
+    <blockquote id="quote-box" style="font-size: 1.5rem; font-weight: 600; margin-top: 2rem;"></blockquote>
+    <p style="margin-top: 1rem;">– Sky</p>
+  </main>
+
+  <script>
+    const quotes = [
+      "Success is the sum of small efforts, repeated every day.",
+      "Push yourself because no one else is going to do it for you.",
+      "Dreams don’t work unless you do.",
+      "The harder you work for something, the greater you’ll feel when you achieve it.",
+      "Stay focused, stay positive, and never give up.",
+      "It always seems impossible until it’s done.",
+      "Consistency is what transforms average into excellence.",
+      "Don’t watch the clock; do what it does. Keep going.",
+      "Discipline is choosing between what you want now and what you want most.",
+      "One day, all your hard work will pay off. Keep going!"
+    ];
+
+    document.getElementById("quote-box").textContent = quotes[new Date().getDate() % quotes.length];
+  </script>
+</body>
+</html>

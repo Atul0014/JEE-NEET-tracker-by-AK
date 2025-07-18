@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compare Progress | JEE-NEET Tracker</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🏁 Compare Progress with Others</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="modules.html">Modules</a>
+      <a href="motivation.html">Motivation</a>
+      <a href="about.html">About</a>
+      <button id="toggle-mode">🌗 Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Your Name: <span id="user-name-display"></span></h2>
+
+    <div style="text-align:center; margin: 1rem 0;">
+      <input type="text" placeholder="Enter competitor name" id="new-user-input"/>
+      <button id="add-user-btn">Compare</button>
+    </div>
+
+    <table border="1" style="width:90%; margin:auto; text-align:center;">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Physics</th>
+          <th>Chemistry</th>
+          <th>Maths</th>
+          <th>Biology</th>
+          <th>Overall</th>
+        </tr>
+      </thead>
+      <tbody id="compare-table">
+        <!-- User rows will be added here -->
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const users = JSON.parse(localStorage.getItem("userProgressList") || "[]");
+      const currentName = localStorage.getItem("jeeUser") || "You";
+      if (!users.includes(currentName)) users.unshift(currentName);
+
+      const input = document.getElementById("new-user-input");
+      const btn = document.getElementById("add-user-btn");
+      const table = document.getElementById("compare-table");
+
+      const loadProgress = (user) => {
+        const p = JSON.parse(localStorage.getItem(`physics-list-${user}`) || "[]");
+        const c = JSON.parse(localStorage.getItem(`chemistry-list-${user}`) || "[]");
+        const m = JSON.parse(localStorage.getItem(`maths-list-${user}`) || "[]");
+        const b = JSON.parse(localStorage.getItem(`bio-list-${user}`) || "[]");
+        const get = (arr) => arr.length ? Math.round(arr.filter(Boolean).length * 100 / arr.length) : 0;
+        const pp = get(p), cc = get(c), mm = get(m), bb = get(b);
+        const overall = Math.round((pp + cc + mm + bb) / 4);
+        return [pp, cc, mm, bb, overall];
+      };
+
+      const renderTable = () => {
+        table.innerHTML = "";
+        users.forEach(user => {
+          const [p, c, m, b, o] = loadProgress(user);
+          const row = `<tr><td>${user}</td><td>${p}%</td><td>${c}%</td><td>${m}%</td><td>${b}%</td><td>${o}%</td></tr>`;
+          table.innerHTML += row;
+        });
+      };
+
+      btn.addEventListener("click", () => {
+        const name = input.value.trim();
+        if (name && !users.includes(name)) {
+          users.push(name);
+          localStorage.setItem("userProgressList", JSON.stringify(users));
+          renderTable();
+          input.value = "";
+        }
+      });
+
+      renderTable();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | JEE-NEET Tracker</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <script defer src="js/script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>📊 Progress Dashboard</h1>
+    <nav>
+      <a href="modules.html">Modules</a>
+      <a href="compare.html">Compare</a>
+      <a href="motivation.html">Motivation</a>
+      <a href="about.html">About</a>
+      <button id="toggle-mode">🌗 Mode</button>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Hello, <span id="user-name-display"></span>! 🚀</h2>
+
+    <section>
+      <h3>Physics Progress</h3>
+      <div class="bar"><div class="fill" id="progress-physics">0%</div></div>
+
+      <h3>Chemistry Progress</h3>
+      <div class="bar"><div class="fill" id="progress-chemistry">0%</div></div>
+
+      <h3>Maths Progress</h3>
+      <div class="bar"><div class="fill" id="progress-maths">0%</div></div>
+
+      <h3>Biology Progress</h3>
+      <div class="bar"><div class="fill" id="progress-biology">0%</div></div>
+
+      <h3>🎯 Overall Progress</h3>
+      <div class="bar"><div class="fill" id="progress-overall">0%</div></div>
+    </section>
+  </main>
+</body>
+</html>
